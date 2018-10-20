@@ -18,6 +18,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:label="@string/review_activity_title"
+            android:name=".ui.review.ReviewActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.selection.SelectionActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.selection.SelectionActivity"/>
+        </activity>
     </application>
 
 </manifest>

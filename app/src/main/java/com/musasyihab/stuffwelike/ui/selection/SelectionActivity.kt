@@ -1,5 +1,6 @@
 package com.musasyihab.stuffwelike.ui.selection
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,6 +9,7 @@ import com.musasyihab.stuffwelike.R
 import com.musasyihab.stuffwelike.di.component.DaggerActivityComponent
 import com.musasyihab.stuffwelike.di.module.ActivityModule
 import com.musasyihab.stuffwelike.model.GetArticleListModel
+import com.musasyihab.stuffwelike.ui.review.ReviewActivity
 import com.musasyihab.stuffwelike.ui.view.*
 import com.musasyihab.stuffwelike.util.Constants
 import com.musasyihab.stuffwelike.util.Helper
@@ -73,7 +75,8 @@ class SelectionActivity : AppCompatActivity(), SelectionContract.View {
 
         selectionDone.setListener(object: SelectionDonePage.OnReviewClick{
             override fun clickReview() {
-                // do something later
+                val reviewIntent = Intent(this@SelectionActivity, ReviewActivity::class.java)
+                startActivity(reviewIntent)
             }
         })
 
