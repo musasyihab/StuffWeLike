@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.widget.Button
 import android.widget.ProgressBar
 import com.musasyihab.stuffwelike.R
 import com.musasyihab.stuffwelike.adapter.ReviewItemAdapter
@@ -31,6 +32,7 @@ class ReviewActivity : AppCompatActivity(), ReviewContract.View {
     private lateinit var loading: ProgressBar
     private lateinit var errorPage: ErrorPageView
     private lateinit var list: RecyclerView
+    private lateinit var switchBtn: Button
 
     private var likedIds: ArrayList<String> = ArrayList(Collections.emptyList())
     private var reviewItems: ArrayList<ArticleSimpleModel> = ArrayList(Collections.emptyList())
@@ -58,6 +60,7 @@ class ReviewActivity : AppCompatActivity(), ReviewContract.View {
         loading = findViewById(R.id.review_loading)
         errorPage = findViewById(R.id.review_error)
         list = findViewById(R.id.review_list)
+        switchBtn = findViewById(R.id.switch_btn)
 
         showProgress(false)
         errorPage.visibility = View.GONE
@@ -79,6 +82,11 @@ class ReviewActivity : AppCompatActivity(), ReviewContract.View {
                 presenter.getArticleList()
             }
         })
+
+        switchBtn.setOnClickListener {
+            isList = !isList
+            loadToView()
+        }
 
     }
 
