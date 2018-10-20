@@ -4,4 +4,6 @@
     <string name="slash">/</string>
     <string name="items_liked">items liked</string>
     <string name="selection_start_text">Welcome to StuffWeLike.\nYou\'re going to select stuffs you like</string>
+    <string name="error_text">Oops..! Something went wrong when trying to retrieve data.</string>
+    <string name="reload">RELOAD</string>
 </resources>

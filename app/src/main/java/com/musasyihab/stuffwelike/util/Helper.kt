@@ -27,24 +27,26 @@ object Helper {
 
     fun fadeOut(view: View) {
 
-        val animation = AnimationUtils.loadAnimation(view.context, R.anim.fade_out)
-        animation.setAnimationListener(object: Animation.AnimationListener{
-            override fun onAnimationRepeat(p0: Animation?) {
-                // nothing to do
-            }
+        if(view.visibility == View.VISIBLE) {
+            val animation = AnimationUtils.loadAnimation(view.context, R.anim.fade_out)
+            animation.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationRepeat(p0: Animation?) {
+                    // nothing to do
+                }
 
-            override fun onAnimationEnd(p0: Animation?) {
-                view.visibility = View.GONE
-            }
+                override fun onAnimationEnd(p0: Animation?) {
+                    view.visibility = View.GONE
+                }
 
-            override fun onAnimationStart(p0: Animation?) {
-                view.visibility = View.VISIBLE
-            }
-        })
-        animation.duration = DURATION_SHORT
-        animation.fillAfter = true
+                override fun onAnimationStart(p0: Animation?) {
 
-        view.startAnimation(animation)
+                }
+            })
+            animation.duration = DURATION_SHORT
+            animation.fillAfter = true
+
+            view.startAnimation(animation)
+        }
     }
 
     fun fadeIn(view: View) {

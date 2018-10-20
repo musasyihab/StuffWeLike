@@ -19,6 +19,7 @@ class SelectionActivity : AppCompatActivity(), SelectionContract.View {
     lateinit var presenter: SelectionContract.Presenter
 
     private lateinit var loading: ProgressBar
+    private lateinit var errorPage: ErrorPageView
     private lateinit var flipper: ArticleFllipperView
     private lateinit var likeDislikeBtns: LikeDislikeButtonsView
     private lateinit var likeCounter: LikeCounterView
@@ -39,6 +40,7 @@ class SelectionActivity : AppCompatActivity(), SelectionContract.View {
 
     private fun initView() {
         loading = findViewById(R.id.selection_loading)
+        errorPage = findViewById(R.id.selection_error)
         flipper = findViewById(R.id.article_flipper)
         likeDislikeBtns = findViewById(R.id.like_dislike_buttons)
         likeCounter = findViewById(R.id.like_counter)
@@ -48,7 +50,15 @@ class SelectionActivity : AppCompatActivity(), SelectionContract.View {
         showProgress(false)
         showStartPage(true)
         showSelectionPage(false)
+        errorPage.visibility = View.GONE
         selectionDone.visibility = View.INVISIBLE
+
+        errorPage.setListener(object: ErrorPageView.OnReloadClick{
+            override fun clickReload() {
+                Helper.fadeOut(errorPage)
+                presenter.getArticleList()
+            }
+        })
 
         likeCounter.setLikes(currentLikes)
         likeDislikeBtns.setListener(object: LikeDislikeButtonsView.OnButtonClick{
@@ -127,7 +137,7 @@ class SelectionActivity : AppCompatActivity(), SelectionContract.View {
     }
 
     override fun showErrorMessage(error: String) {
-        // do something later
+        Helper.fadeIn(errorPage)
     }
 
     override fun loadDataSuccess(response: GetArticleListModel) {
