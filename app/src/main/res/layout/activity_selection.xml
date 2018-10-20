@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.selection.SelectionActivity">
+
+    <com.musasyihab.stuffwelike.ui.view.SelectionStartPage
+        android:id="@+id/selection_start"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <ProgressBar
+        android:id="@+id/selection_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.musasyihab.stuffwelike.ui.view.ArticleFllipperView
+        android:id="@+id/article_flipper"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/like_dislike_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.musasyihab.stuffwelike.ui.view.LikeCounterView
+        android:id="@+id/like_counter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.musasyihab.stuffwelike.ui.view.SelectionDonePage
+        android:id="@+id/selection_done"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.musasyihab.stuffwelike.ui.view.LikeDislikeButtonsView
+        android:id="@+id/like_dislike_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/article_flipper"/>
+
+</android.support.constraint.ConstraintLayout>

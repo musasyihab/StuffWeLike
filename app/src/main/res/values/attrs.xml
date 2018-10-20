@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ArticleItemView">
+        <attr name="title"/>
+        <attr name="itemId"/>
+        <attr name="counter"/>
+        <attr name="imageSrc"/>
+    </declare-styleable>
+    <declare-styleable name="SelectionDonePage">
+        <attr name="likes"/>
+    </declare-styleable>
+</resources>

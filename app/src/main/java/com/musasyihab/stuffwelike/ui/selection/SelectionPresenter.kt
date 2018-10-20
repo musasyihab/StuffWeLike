@@ -29,11 +29,13 @@ class SelectionPresenter: SelectionContract.Presenter {
         var subscribe = obs.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: GetArticleListModel? ->
+                    view.showSelectionPage(true)
                     view.loadDataSuccess(response!!)
                     view.showProgress(false)
                 }, { error ->
                     view.showErrorMessage(error.localizedMessage)
                     view.showProgress(false)
+                    view.showSelectionPage(false)
                 })
 
         subscriptions.add(subscribe)
