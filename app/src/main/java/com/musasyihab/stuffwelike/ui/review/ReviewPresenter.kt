@@ -32,7 +32,8 @@ class ReviewPresenter: ReviewContract.Presenter {
                     view.loadDataSuccess(response!!)
                     view.showProgress(false)
                 }, { error ->
-                    view.showErrorMessage(error.localizedMessage)
+                    error.printStackTrace()
+                    view.showErrorMessage()
                     view.showProgress(false)
                 })
 

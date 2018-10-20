@@ -8,11 +8,13 @@ import android.widget.ProgressBar
 import com.musasyihab.stuffwelike.R
 import com.musasyihab.stuffwelike.di.component.DaggerActivityComponent
 import com.musasyihab.stuffwelike.di.module.ActivityModule
+import com.musasyihab.stuffwelike.model.ArticleModel
 import com.musasyihab.stuffwelike.model.GetArticleListModel
 import com.musasyihab.stuffwelike.ui.review.ReviewActivity
 import com.musasyihab.stuffwelike.ui.view.*
 import com.musasyihab.stuffwelike.util.Constants
 import com.musasyihab.stuffwelike.util.Helper
+import java.util.*
 import javax.inject.Inject
 
 class SelectionActivity : AppCompatActivity(), SelectionContract.View {
@@ -29,6 +31,8 @@ class SelectionActivity : AppCompatActivity(), SelectionContract.View {
     private lateinit var selectionStart: SelectionStartPage
     private var currentLikes: Int = 0
     private var currentIndex: Int = 0
+    private var likedIds: ArrayList<String> = ArrayList(Collections.emptyList())
+    private var articles: List<ArticleModel> = Collections.emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +80,7 @@ class SelectionActivity : AppCompatActivity(), SelectionContract.View {
         selectionDone.setListener(object: SelectionDonePage.OnReviewClick{
             override fun clickReview() {
                 val reviewIntent = Intent(this@SelectionActivity, ReviewActivity::class.java)
+                reviewIntent.putExtra(ReviewActivity.EXTRA.LIKED_IDS, likedIds)
                 startActivity(reviewIntent)
             }
         })
@@ -97,8 +102,8 @@ class SelectionActivity : AppCompatActivity(), SelectionContract.View {
 
     private fun nextItem(addLike: Boolean) {
         if(!isLastItem()) {
-            currentIndex++
             if (addLike) addLikes()
+            currentIndex++
             flipper.nextArticle()
         } else {
             if (addLike) addLikes()
@@ -109,6 +114,8 @@ class SelectionActivity : AppCompatActivity(), SelectionContract.View {
     }
 
     private fun addLikes() {
+        val currentItem = articles[currentIndex]
+        likedIds.add(currentItem.sku)
         currentLikes++
         likeCounter.setLikes(currentLikes)
     }
@@ -144,6 +151,7 @@ class SelectionActivity : AppCompatActivity(), SelectionContract.View {
     }
 
     override fun loadDataSuccess(response: GetArticleListModel) {
+        articles = response._embedded.articles
         flipper.setArticles(response._embedded.articles)
     }
 

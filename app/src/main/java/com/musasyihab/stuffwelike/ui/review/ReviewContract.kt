@@ -7,7 +7,7 @@ class ReviewContract {
 
     interface View: BaseContract.View {
         fun showProgress(show: Boolean)
-        fun showErrorMessage(error: String)
+        fun showErrorMessage()
         fun loadDataSuccess(response: GetArticleListModel)
     }
 
