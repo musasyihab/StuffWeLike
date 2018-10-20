@@ -48,7 +48,7 @@ class SelectionActivity : AppCompatActivity(), SelectionContract.View {
         showProgress(false)
         showStartPage(true)
         showSelectionPage(false)
-        selectionDone.visibility = View.GONE
+        selectionDone.visibility = View.INVISIBLE
 
         likeCounter.setLikes(currentLikes)
         likeDislikeBtns.setListener(object: LikeDislikeButtonsView.OnButtonClick{
@@ -113,7 +113,11 @@ class SelectionActivity : AppCompatActivity(), SelectionContract.View {
     }
 
     override fun showStartPage(show: Boolean) {
-        selectionStart.visibility = if (show) View.VISIBLE else View.GONE
+        if(show){
+            selectionStart.visibility = View.VISIBLE
+        } else {
+            Helper.fadeOut(selectionStart)
+        }
     }
 
     override fun showSelectionPage(show: Boolean) {
