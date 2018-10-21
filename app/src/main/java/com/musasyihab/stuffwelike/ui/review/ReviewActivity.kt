@@ -1,12 +1,14 @@
 package com.musasyihab.stuffwelike.ui.review
 
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import android.widget.ProgressBar
 import com.musasyihab.stuffwelike.R
 import com.musasyihab.stuffwelike.adapter.ReviewItemAdapter
@@ -32,7 +34,6 @@ class ReviewActivity : AppCompatActivity(), ReviewContract.View {
     private lateinit var loading: ProgressBar
     private lateinit var errorPage: ErrorPageView
     private lateinit var list: RecyclerView
-    private lateinit var switchBtn: Button
 
     private var likedIds: ArrayList<String> = ArrayList(Collections.emptyList())
     private var reviewItems: ArrayList<ArticleSimpleModel> = ArrayList(Collections.emptyList())
@@ -60,7 +61,6 @@ class ReviewActivity : AppCompatActivity(), ReviewContract.View {
         loading = findViewById(R.id.review_loading)
         errorPage = findViewById(R.id.review_error)
         list = findViewById(R.id.review_list)
-        switchBtn = findViewById(R.id.switch_btn)
 
         showProgress(false)
         errorPage.visibility = View.GONE
@@ -82,11 +82,6 @@ class ReviewActivity : AppCompatActivity(), ReviewContract.View {
                 presenter.getArticleList()
             }
         })
-
-        switchBtn.setOnClickListener {
-            isList = !isList
-            loadToView()
-        }
 
     }
 
@@ -128,7 +123,6 @@ class ReviewActivity : AppCompatActivity(), ReviewContract.View {
     }
 
     override fun loadDataSuccess(response: GetArticleListModel) {
-        // do something later
         reviewItems = ArrayList(Collections.emptyList())
         for (item in response._embedded.articles) {
             var src = if (item.media.isNotEmpty()) item.media[0].uri else ""
@@ -137,6 +131,36 @@ class ReviewActivity : AppCompatActivity(), ReviewContract.View {
             reviewItems.add(simple)
         }
         loadToView()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.review_activity_menu, menu)
+        val switchMenu = menu!!.getItem(0)
+        switchMenuIcon(switchMenu)
+        return true
+    }
+
+    private fun switchMenuIcon(switchMenu: MenuItem) {
+        if (isList) {
+            switchMenu.icon = ContextCompat.getDrawable(this, R.drawable.ic_list_white)
+        } else {
+            switchMenu.icon = ContextCompat.getDrawable(this, R.drawable.ic_grid_white)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val id = item!!.getItemId()
+
+        when (id) {
+            R.id.action_review_switch -> {
+                isList = !isList
+                switchMenuIcon(item)
+                loadToView()
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
 }
