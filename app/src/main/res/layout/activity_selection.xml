@@ -6,11 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.selection.SelectionActivity">
 
-    <com.musasyihab.stuffwelike.ui.view.SelectionStartPage
-        android:id="@+id/selection_start"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <com.musasyihab.stuffwelike.ui.view.ErrorPageView
         android:id="@+id/selection_error"
         android:layout_width="match_parent"

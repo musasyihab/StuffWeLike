@@ -25,7 +25,6 @@ class SelectionPresenter: SelectionContract.Presenter {
 
     override fun getArticleList() {
         view.showProgress(true)
-        view.showStartPage(false)
         val obs = api.getArticles()
         var subscribe = obs.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

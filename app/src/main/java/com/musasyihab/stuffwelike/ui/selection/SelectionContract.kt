@@ -7,7 +7,6 @@ class SelectionContract {
 
     interface View: BaseContract.View {
         fun showProgress(show: Boolean)
-        fun showStartPage(show: Boolean)
         fun showSelectionPage(show: Boolean)
         fun showErrorMessage(error: String)
         fun loadDataSuccess(response: GetArticleListModel)

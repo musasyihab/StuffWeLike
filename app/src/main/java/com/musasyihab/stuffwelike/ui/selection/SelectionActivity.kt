@@ -28,7 +28,6 @@ class SelectionActivity : AppCompatActivity(), SelectionContract.View {
     private lateinit var likeDislikeBtns: LikeDislikeButtonsView
     private lateinit var likeCounter: LikeCounterView
     private lateinit var selectionDone: SelectionDonePage
-    private lateinit var selectionStart: SelectionStartPage
     private var currentLikes: Int = 0
     private var currentIndex: Int = 0
     private var likedIds: ArrayList<String> = ArrayList(Collections.emptyList())
@@ -51,10 +50,8 @@ class SelectionActivity : AppCompatActivity(), SelectionContract.View {
         likeDislikeBtns = findViewById(R.id.like_dislike_buttons)
         likeCounter = findViewById(R.id.like_counter)
         selectionDone = findViewById(R.id.selection_done)
-        selectionStart = findViewById(R.id.selection_start)
 
         showProgress(false)
-        showStartPage(true)
         showSelectionPage(false)
         errorPage.visibility = View.GONE
         selectionDone.visibility = View.INVISIBLE
@@ -85,11 +82,8 @@ class SelectionActivity : AppCompatActivity(), SelectionContract.View {
             }
         })
 
-        selectionStart.setListener(object: SelectionStartPage.OnStartClick{
-            override fun clickStart() {
-                presenter.getArticleList()
-            }
-        })
+        presenter.getArticleList()
+
     }
 
     private fun injectDependency() {
@@ -125,18 +119,9 @@ class SelectionActivity : AppCompatActivity(), SelectionContract.View {
     override fun showProgress(show: Boolean) {
         if(show) {
             loading.visibility = View.VISIBLE
-            showStartPage(false)
             showSelectionPage(false)
         } else {
             loading.visibility = View.GONE
-        }
-    }
-
-    override fun showStartPage(show: Boolean) {
-        if(show){
-            selectionStart.visibility = View.VISIBLE
-        } else {
-            Helper.fadeOut(selectionStart)
         }
     }
 

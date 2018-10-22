@@ -5,6 +5,8 @@ import com.musasyihab.stuffwelike.ui.review.ReviewContract
 import com.musasyihab.stuffwelike.ui.review.ReviewPresenter
 import com.musasyihab.stuffwelike.ui.selection.SelectionContract
 import com.musasyihab.stuffwelike.ui.selection.SelectionPresenter
+import com.musasyihab.stuffwelike.ui.start.StartContract
+import com.musasyihab.stuffwelike.ui.start.StartPresenter
 import dagger.Module
 import dagger.Provides
 
@@ -24,6 +26,11 @@ class ActivityModule(private var activity: Activity) {
     @Provides
     fun provideReviewPresenter(): ReviewContract.Presenter {
         return ReviewPresenter()
+    }
+
+    @Provides
+    fun provideStartPresenter(): StartContract.Presenter {
+        return StartPresenter()
     }
 
 

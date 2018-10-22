@@ -7,7 +7,7 @@ import android.view.animation.TranslateAnimation
 import com.musasyihab.stuffwelike.R
 
 object Helper {
-    private const val DURATION_SHORT: Long = 300
+    private const val DURATION_SHORT: Long = 600
     private const val DURATION_LONG: Long = 1000
 
     fun slideUp(view: View) {
@@ -70,4 +70,5 @@ object Helper {
 
         view.startAnimation(animation)
     }
+
 }
